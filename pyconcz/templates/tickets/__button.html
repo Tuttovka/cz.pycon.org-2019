@@ -1,14 +1,14 @@
 {% if ticket.early_bird.upcoming %}
-    <button class="btn btn-primary disabled px-3 my-3 mx-auto" disabled>Not for sale yet</button>
-{% else %}
+    <button class="btn btn-primary disabled px-3 mx-auto" disabled>Not for sale yet</button>
+{% elif not ticket.regular.sold_out %}
     {% if tickets.cached %}
-        <button disabled class="tito-tickets-button d-none pc-display-via-js">
+        <button disabled class="tito-tickets-button d-none pc-js-display">
             <span class="spinner-border d-inline-block spinner-border-sm" role="status"></span>
             Please wait
         </button>
         <script>
             Array.prototype.forEach.call(
-                document.querySelectorAll('.tito-tickets-button.d-none.pc-display-via-js'),
+                document.querySelectorAll('.tito-tickets-button.d-none.pc-js-display'),
                 function(btn){
                     btn.classList.remove("d-none");
                 }
@@ -25,5 +25,4 @@
         </tito-button>
         {% comment %}This branch is loaded via Javascript, so we don't have to deal with noscript here.{% endcomment %}
     {% endif %}
-
 {% endif %}
